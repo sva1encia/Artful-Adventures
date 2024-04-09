@@ -23,16 +23,32 @@
  * 
  */
 
-
-const FRESH_PRINCE_URL = "https://upload.wikimedia.org/wikipedia/en/3/33/Fresh_Prince_S1_DVD.jpg";
-const CURB_POSTER_URL = "https://m.media-amazon.com/images/M/MV5BZDY1ZGM4OGItMWMyNS00MDAyLWE2Y2MtZTFhMTU0MGI5ZDFlXkEyXkFqcGdeQXVyMDc5ODIzMw@@._V1_FMjpg_UX1000_.jpg";
-const EAST_LOS_HIGH_POSTER_URL = "https://static.wikia.nocookie.net/hulu/images/6/64/East_Los_High.jpg";
-
-// This is an array of strings (TV show titles)
-let titles = [
-    "Fresh Prince of Bel Air",
-    "Curb Your Enthusiasm",
-    "East Los High"
+const artworks = [
+    {
+        title: "Owl",
+        artist: "Vincent van Gogh",
+        medium: "Oil on Canvas",
+        image: "img/owl.jpg"
+    },
+    {
+        title: "Flowers",
+        artist: "Vincent van Gogh",
+        medium: "Oil on Canvas",
+        image: "img/flowers.jpg"
+    },
+    {
+        title: "Tower",
+        artist: "Leonardo da Vinci",
+        medium: "Oil on Panel",
+        image: "img/tower.jpg"
+    },
+    {
+        title: "Art", 
+        artist: "Micheal Duo", 
+        medium: "oil paint", 
+        image: "img/art.jpg"
+     
+    }
 ];
 // Your final submission should have much more data than this, and 
 // you should use more than just an array of strings to store it all.
@@ -41,54 +57,103 @@ let titles = [
 // This function adds cards the page to display the data in the array
 function showCards() {
     const cardContainer = document.getElementById("card-container");
+    console.log("cardContainer:", cardContainer);
     cardContainer.innerHTML = "";
     const templateCard = document.querySelector(".card");
+    console.log("templateCard:", templateCard);
     
-    for (let i = 0; i < titles.length; i++) {
-        let title = titles[i];
+    for (let i = 0; i < artworks.length; i++) {
+        const artwork = artworks[i];
+        const nextCard = templateCard.cloneNode(true);
+        nextCard.style.display = "block";
+        const cardContent = nextCard.querySelector(".card-content");
+        console.log("cardContent:", cardContent);
 
         // This part of the code doesn't scale very well! After you add your
         // own data, you'll need to do something totally different here.
-        let imageURL = "";
-        if (i == 0) {
-            imageURL = FRESH_PRINCE_URL;
-        } else if (i == 1) {
-            imageURL = CURB_POSTER_URL;
-        } else if (i == 2) {
-            imageURL = EAST_LOS_HIGH_POSTER_URL;
-        }
+        
+        const cardTitle = cardContent.querySelector("h2");
+        console.log("cardTitle:", cardTitle);
+        cardTitle.textContent = artwork.title; 
 
-        const nextCard = templateCard.cloneNode(true); // Copy the template card
-        editCardContent(nextCard, title, imageURL); // Edit title and image
-        cardContainer.appendChild(nextCard); // Add new card to the container
+        const cardImage = cardContent.querySelector("img");
+        console.log("cardImage:", cardImage);
+        cardImage.src = artwork.image;
+        cardImage.alt = artwork.title + " by " + artwork.artist;
+
+        const cardList = cardContent.querySelector("ul");
+        console.log("cardList:", cardList);
+        const artistListItem = cardList.querySelector(".artist");
+        console.log("artistListItem:", artistListItem);
+        artistListItem.textContent = "Artist: " + artwork.artist;
+        const mediumListItem = cardList.querySelector(".medium");
+        console.log("mediumListItem:", mediumListItem);
+        mediumListItem.textContent = "Medium: " + artwork.medium;
+
+        cardContainer.appendChild(nextCard);
     }
-}
-
-function editCardContent(card, newTitle, newImageURL) {
-    card.style.display = "block";
-
-    const cardHeader = card.querySelector("h2");
-    cardHeader.textContent = newTitle;
-
-    const cardImage = card.querySelector("img");
-    cardImage.src = newImageURL;
-    cardImage.alt = newTitle + " Poster";
-
-    // You can use console.log to help you debug!
-    // View the output by right clicking on your website,
-    // select "Inspect", then click on the "Console" tab
-    console.log("new card:", newTitle, "- html: ", card);
 }
 
 // This calls the addCards() function when the page is first loaded
 document.addEventListener("DOMContentLoaded", showCards);
 
-function quoteAlert() {
-    console.log("Button Clicked!")
-    alert("I guess I can kiss heaven goodbye, because it got to be a sin to look this good!");
+function addPicture() {
+    const newArtwork1 = {
+        title: "Art", 
+        artist: "Micheal Duo", 
+        medium: "oil paint", 
+        image: "img/art.jpg"
+    
+    };
+    artworks.push(newArtwork1);
+    
+    const newArtwork2 = {
+        title: "Abstract", 
+        artist: "Michelangelo", 
+        medium: "Watercolor", 
+        image: "img/abstrac.jpg"
+    };
+    artworks.push(newArtwork2);
+    const newArtwork3 = {
+        title: "City", 
+        artist: "Michelangelo", 
+        medium: "oil on canvas", 
+        image: "img/city.jpg"
+    };
+    artworks.push(newArtwork3);
+    const newArtwork4 = {
+        title: "Nature", 
+        artist: "Rembrandt", 
+        medium: "oil on canvas", 
+        image: "img/nature.jpg"
+    };
+    artworks.push(newArtwork4);
+    const newArtwork5 = {
+        title: "Rocks ", 
+        artist: "Salvador Dali", 
+        medium: "oil on panel", 
+        image: "img/rocks.jpg"
+    };
+    artworks.push(newArtwork5);
+    const newArtwork6 = {
+        title: "Snow", 
+        artist: "Claude Monet", 
+        medium: "oil on canvas", 
+        image: "img/snow.jpg"
+    };
+    artworks.push(newArtwork6);
+    const newArtwork7 = {
+        title: "Waterfall", 
+        artist: "Claude Monet", 
+        medium: "oil on panel", 
+        image: "img/water.jpg"
+    };
+    artworks.push(newArtwork7);
+    showCards();
+
 }
 
-function removeLastCard() {
-    titles.pop(); // Remove last item in titles array
+function removePicture() {
+    artworks.pop(); // Remove last item in titles array
     showCards(); // Call showCards again to refresh
 }

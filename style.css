@@ -15,7 +15,7 @@ body {
     font-size: 8em;
     font-family: "Helvetica";
     font-weight: normal;
-    color: white;
+    color: black;
 }
 
 #card-container {
@@ -35,12 +35,13 @@ body {
 .card-content {
     padding: 20px;
     font-family: "Verdana";
-    color: #777;
+    color:black;
 }
 
 .card-content h2 {
     margin-top: 0;
     font-size: 20px;
+    text-align: center;
 }
 
 .card img {
